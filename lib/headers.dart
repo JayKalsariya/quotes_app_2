@@ -1,0 +1,9 @@
+export 'package:flutter/material.dart';
+export 'myapp.dart';
+export 'package:quotes_app_2/utils/routes.dart';
+export '../modals/quotes_modal.dart';
+export 'package:quotes_app_2/screens/splashscreen/splash_screen.dart';
+export '../screens/homepage/home_page.dart';
+export 'package:quotes_app_2/screens/homepage/components/appbar.dart';
+export '../../../utils/appdata.dart';
+export '../screens/detailPage/detail_page.dart';
