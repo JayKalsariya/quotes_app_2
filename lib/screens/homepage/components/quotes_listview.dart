@@ -1,6 +1,9 @@
 import 'package:quotes_app_2/headers.dart';
 
-Widget quotesListView() {
+Widget quotesListView({
+  required String selectedCategory,
+  required List<String> selectCategory,
+}) {
   return Expanded(
     flex: 12,
     // child: ListView.separated(

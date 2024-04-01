@@ -25,7 +25,9 @@ class _DetailPageState extends State<DetailPage> {
     ui.Image image = await boundary.toImage(
       pixelRatio: 15,
     );
-    ByteData? data = await image.toByteData();
+    ByteData? data = await image.toByteData(
+      format: ui.ImageByteFormat.png,
+    );
     Uint8List list = data!.buffer.asUint8List();
 
     Directory directory = await getTemporaryDirectory();
@@ -49,44 +51,49 @@ class _DetailPageState extends State<DetailPage> {
           setState(() {});
         },
         context: context,
-        getFileFromWidget: () {},
+        getFileFromWidget: () {
+          return getFileFromWidget();
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(Globals.radius),
-                  color: Globals.color,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-//Quote
-                    Text(
-                      quote.quote,
-                      style: TextStyle(
-                        color: Globals.fcolor,
-                        fontSize: 20,
-                        fontFamily: Globals.font,
+              RepaintBoundary(
+                key: widgetKey,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(Globals.radius),
+                    color: Globals.color,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //Quote
+                      Text(
+                        quote.quote,
+                        style: TextStyle(
+                          color: Globals.fcolor,
+                          fontSize: 20,
+                          fontFamily: Globals.font,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-//Author
-                    Text(
-                      "📝 ${quote.author}",
-                      style: TextStyle(
-                        color: Globals.fcolor,
-                        fontSize: 16,
-                        fontFamily: Globals.font,
+                      const SizedBox(height: 10),
+                      //Author
+                      Text(
+                        "📝 ${quote.author}",
+                        style: TextStyle(
+                          color: Globals.fcolor,
+                          fontSize: 16,
+                          fontFamily: Globals.font,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 10),

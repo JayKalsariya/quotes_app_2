@@ -57,10 +57,11 @@ class _HomePageState extends State<HomePage> {
                 categoryList(
                   selectedCategory: '',
                   selectCategory: [],
-                  // setState: setState(() {}),
                 ),
                 const SizedBox(height: 10),
-                _isList ? quotesListView() : quotesGridView(),
+                _isList
+                    ? quotesListView(selectedCategory: '', selectCategory: [])
+                    : quotesGridView(),
               ],
             ),
           ),

@@ -13,7 +13,7 @@ AppBar myAppBar2({
   required Quote quote,
   required void Function() onReset,
   required BuildContext context,
-  required Function<File>() getFileFromWidget,
+  required Function() getFileFromWidget,
 }) {
   return AppBar(
     title: const Text(

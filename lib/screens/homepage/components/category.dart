@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:quotes_app_2/headers.dart';
 
 Widget categoryList({
   required String selectedCategory,
   required List<String> selectCategory,
-  // required List<String> Cate,
 }) {
   return StatefulBuilder(builder: (context, setState) {
     return SizedBox(
@@ -15,16 +16,23 @@ Widget categoryList({
           (index) => GestureDetector(
             onTap: () {
               selectedCategory = allCategories[index];
-              selectCategory = allQuoteData
-                  .where((element) => element['category'] == selectedCategory)
-                  .toList() as List<String>;
+
+              // allQuotes
+              //     .map((e) => e.category == selectedCategory
+              //         ? e
+              //         : null)
+              //     .toList();
+              // selectCategory = allCategories
+              //     .where((element) => element == selectedCategory)
+              //     .toList();
+              log('selectCategory: $selectedCategory');
               setState(() {});
             },
             child: Container(
               margin: const EdgeInsets.all(3),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: selectedCategory == allCategories[index]
+                color: allCategories[index] == selectedCategory
                     ? const Color(0xff93A5CF)
                     : const Color(0xffE4EfE9),
                 border: Border.all(),
