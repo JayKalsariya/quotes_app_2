@@ -1,6 +1,10 @@
+import 'package:quotes_app_2/Controller/quote_controller.dart';
 import 'package:quotes_app_2/headers.dart';
+import 'package:quotes_app_2/utils/global.dart';
 
-Widget quotesGridView() {
+Widget quotesGridView({
+  required Controller c,
+}) {
   return Expanded(
     flex: 12,
     child: Padding(
@@ -16,29 +20,56 @@ Widget quotesGridView() {
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
           ),
-          itemCount: allQuotes.length,
+          itemCount: Controller.allQuotes.length,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () {
               Navigator.pushNamed(
                 context,
                 MyRoutes.detailPage,
-                arguments: allQuotes[index],
+                arguments: Controller.allQuotes[index],
               );
             },
             child: Card(
-              color: const Color(0xffc1c8da),
+              color: Globals.isDark
+                  ? const Color(0xffc1c8da)
+                  : const Color(0xff070F2B),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      allQuotes[index].quote,
-                      maxLines: 6,
+                      Controller.allQuotes[index].text,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Globals.isDark
+                            ? Colors.black
+                            : const Color(0xffE4EfE9),
+                      ),
                     ),
-                    Text("- ${allQuotes[index].author}"),
+                    const SizedBox(height: 47),
+                    Text(
+                      "- ${Controller.allQuotes[index].author}",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Globals.isDark
+                            ? Colors.black
+                            : const Color(0xffE4EfE9),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Globals.isOn
+                          ? const Icon(Icons.favorite)
+                          : Icon(
+                              Icons.favorite_border,
+                              color:
+                                  Globals.isDark ? Colors.black : Colors.white,
+                            ),
+                    ),
                   ],
                 ),
               ),

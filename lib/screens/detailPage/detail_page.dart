@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:quotes_app_2/Controller/quote_controller.dart';
 import 'package:quotes_app_2/headers.dart';
 import 'package:quotes_app_2/screens/detailPage/components/appbar2.dart';
 import 'package:quotes_app_2/utils/fonts_enum.dart';
@@ -23,7 +25,7 @@ class _DetailPageState extends State<DetailPage> {
     RenderRepaintBoundary boundary =
         widgetKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
     ui.Image image = await boundary.toImage(
-      pixelRatio: 15,
+      pixelRatio: 5,
     );
     ByteData? data = await image.toByteData(
       format: ui.ImageByteFormat.png,
@@ -42,7 +44,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     Quote quote = ModalRoute.of(context)!.settings.arguments as Quote;
-
+    Controller c = Provider.of<Controller>(context);
     return Scaffold(
       appBar: myAppBar2(
         quote: quote,
@@ -75,7 +77,7 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       //Quote
                       Text(
-                        quote.quote,
+                        quote.text,
                         style: TextStyle(
                           color: Globals.fcolor,
                           fontSize: 20,

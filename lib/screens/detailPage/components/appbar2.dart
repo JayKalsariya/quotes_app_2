@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:quotes_app_2/headers.dart';
@@ -16,6 +17,12 @@ AppBar myAppBar2({
   required Function() getFileFromWidget,
 }) {
   return AppBar(
+    leading: IconButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      icon: const Icon(CupertinoIcons.back),
+    ),
     title: const Text(
       'Detail Page',
       style: TextStyle(fontWeight: FontWeight.bold),
@@ -29,7 +36,7 @@ AppBar myAppBar2({
         onPressed: () {
           Clipboard.setData(
             ClipboardData(
-              text: "${quote.quote}\n\n\n\t- ${quote.author}",
+              text: "${quote.text}\n\n\n\t- ${quote.author}",
             ),
           );
         },

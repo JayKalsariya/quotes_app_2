@@ -9,6 +9,9 @@ class Globals {
   static double radius = 0;
   static double opacity = 1;
   static String font = CardFont.roboto.name;
+  static bool isDark = true;
+  static bool isOn = false;
+  static List<Quote> fav = [];
 
   static void reset() {
     color = Colors.white;
@@ -16,4 +19,6 @@ class Globals {
     radius = 0;
     fcolor = Colors.black;
   }
+
+  favInSP() {}
 }

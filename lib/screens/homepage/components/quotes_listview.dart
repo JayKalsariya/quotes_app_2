@@ -1,8 +1,14 @@
+import 'dart:developer';
+
+import 'package:quotes_app_2/Controller/quote_controller.dart';
 import 'package:quotes_app_2/headers.dart';
+import 'package:quotes_app_2/utils/global.dart';
 
 Widget quotesListView({
   required String selectedCategory,
   required List<String> selectCategory,
+  required Controller c,
+  required Function() getsetState,
 }) {
   return Expanded(
     flex: 12,
@@ -27,39 +33,88 @@ Widget quotesListView({
       interactive: true,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
-        itemCount: allQuotes.length,
+        itemCount: Controller.allQuotes.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
               Navigator.pushNamed(
                 context,
                 MyRoutes.detailPage,
-                arguments: allQuotes[index],
+                arguments: Controller.allQuotes[index],
               );
             },
             child: Card(
-              color: const Color(0xffc1c8da),
+              color: Globals.isDark
+                  ? const Color(0xffc1c8da)
+                  : const Color(0xff070F2B),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Align(
+                    //   alignment: Alignment.centerRight,
+                    //   child: IconButton(
+                    //     onPressed: () {
+                    //       Globals.isOn = !Globals.isOn;
+                    //       Globals.fav.add(Controller.allQuotes[index]);
+                    //       log("=======================");
+                    //       getsetState();
+                    //     },
+                    //     icon: Globals.isOn
+                    //         ? const Icon(Icons.favorite, color: Colors.red)
+                    //         : Icon(Icons.favorite_border,
+                    //             color: Globals.isDark
+                    //                 ? Colors.black
+                    //                 : Colors.white),
+                    //   ),
+                    // ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Globals.isOn = !Globals.isOn;
+                          Globals.fav.add(Controller.allQuotes[index]);
+                          log("=======================");
+                        },
+                        child: const Text(
+                          'Favorite',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
                     Text(
-                      allQuotes[index].quote,
-                      // style: TextStyle(color: Color(0xffE4EfE9)),
+                      Controller.allQuotes[index].text,
+                      style: TextStyle(
+                        color: Globals.isDark
+                            ? Colors.black
+                            : const Color(0xffE4EfE9),
+                      ),
                     ),
                     const SizedBox(height: 15),
                     Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        allQuotes[index].category,
+                        Controller.allQuotes[index].category,
+                        style: TextStyle(
+                          color: Globals.isDark
+                              ? Colors.black
+                              : const Color(0xffE4EfE9),
+                        ),
                       ),
                     ),
                     Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "~ ${allQuotes[index].author}",
+                        "~ ${Controller.allQuotes[index].author}",
+                        style: TextStyle(
+                          color: Globals.isDark
+                              ? Colors.black
+                              : const Color(0xffE4EfE9),
+                        ),
                       ),
                     ),
                   ],

@@ -1,32 +1,27 @@
-//Modal class   =>  Structure
 class Quote {
-  //Attributes
-  final String quote;
-  final String author;
-  final String category;
-  int likes = 0;
-  bool isLiked = false;
+  int id;
+  String text;
+  String author;
+  String category;
 
-  //Parameterized constructor
   Quote({
-    required this.quote,
+    required this.id,
+    required this.text,
     required this.author,
     required this.category,
   });
 
-  //Factory constructor:  Map =>  Current Class Object
-  factory Quote.fromMap({required Map data}) => Quote(
-        quote: data['quote'],
-        author: data['author'],
-        category: data['category'],
+  factory Quote.fromJson(Map<String, dynamic> json) => Quote(
+        id: json["id"],
+        text: json["text"],
+        author: json["author"],
+        category: json["category"],
       );
 
-  // Object => Map
-  Map<String, dynamic> get toMap => {
-        'quote': quote,
-        'author': author,
-        'category': category,
-        'likes': likes,
-        'isLiked': isLiked,
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "text": text,
+        "author": author,
+        "category": category,
       };
 }
